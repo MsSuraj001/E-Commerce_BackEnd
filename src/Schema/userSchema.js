@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt')
 
 const userSchema = new mongoose.Schema({
     firstName: {
@@ -49,6 +50,11 @@ const userSchema = new mongoose.Schema({
     }
 
 }, {timeseries: true, timestamps: true});
+
+userSchema.pre('save', async function (){
+    const hashPassword = await bcrypt.hash(this.password, 10);
+    this.password = hashPassword;
+})
 
 const User = mongoose.model("Users", userSchema);
 
