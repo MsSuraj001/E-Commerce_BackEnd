@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-const User = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     firstName: {
         type: String,
         min : [5, "Atleast min 5 character in first name"],
@@ -26,8 +26,8 @@ const User = new mongoose.Schema({
         type: Number,
         required: true,
         unique : true,
-        min : [10, "atleast at the minimun 10 digit mobileNumber"],
-        max : [10, "atleast at the minimun 12 digit mobileNumber"],
+        // min : [10, "atleast at the minimun 10 digit mobileNumber"],
+        // max : [12, "atleast at the minimun 12 digit mobileNumber"],
     },
     password : {
         type: String,
@@ -50,6 +50,8 @@ const User = new mongoose.Schema({
 
 }, {timeseries: true, timestamps: true});
 
-const userSchema = mongoose.model("Users", User);
+const User = mongoose.model("Users", userSchema);
 
-module.exports = userSchema;
+module.exports = {
+    User
+}
