@@ -12,9 +12,10 @@ async function registerUser(userDetails){
     // }
 
     if(user) {
-        const error = new Error('User with the given Mobile Number & Email id already exist');
-        error.status = 400;
-        throw error;
+        // const error = new Error('User with the given Mobile Number & Email id already exist');
+        // error.status = 400;
+        // throw error;
+        throw { reason : 'User with the given Mobile Number & Email id already exist', status: 400}
     }
         const newUser = await createUser({
             firstName : userDetails.firstName,
@@ -27,9 +28,11 @@ async function registerUser(userDetails){
             role : userDetails.role,
         });
         if(!newUser){
-            const error = new Error('Something went wrong User not registarted');
-            error.status = 500;
-            throw error;
+            // const error = new Error('Something went wrong User not registarted');
+            // error.status = 500;
+            // throw error;
+
+            throw { reason : 'Something went wrong User not registarted', status : 500}
         }
         return newUser;
     
