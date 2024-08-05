@@ -8,6 +8,7 @@ const { isLoggedIn } = require('./Validations/authValidation');
 const  cloudinary  = require('./Config/cloudinayConfig');
 const uploader = require('./Middleweres/multerMiddlewere');
 const fs = require('fs/promises');
+const pizzaRoute = require('./Router/pizzaRoutes');
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(express.urlencoded({extended: true}));
 
 app.use('/user', routes);
 app.use('/auth', authRoutes);
+app.use('/pizza',pizzaRoute);
 app.get('/test', isLoggedIn, (req, res)=>{
     console.log(req.body);
     console.log(req.cookies)
