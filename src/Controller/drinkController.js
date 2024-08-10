@@ -10,7 +10,7 @@ async function addDrink(req, res){
             drinkWeight : req.body.drinkWeight,
             quantity : req.body.quantity,
             inStock: req.body.inStock,
-            drinkImgPath : req.file.path
+            drinkImgPath : req.file?.path
         })
         return res.json({
             message: 'Drink added successfully',

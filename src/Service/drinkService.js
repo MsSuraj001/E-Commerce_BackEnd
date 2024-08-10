@@ -11,7 +11,7 @@ async function createDrink(drinkDetails){
         try{
             const cloudinaryResponse = await cloudinary.uploader.upload(drinkImgPath);
             var imgPathD = cloudinaryResponse.secure_url;
-            await fs.unlink(drinkImgPath)
+            await fs.unlink(process.cwd() + "/" + drinkImgPath)
         }catch(err){
             console.log(err);
             throw { reason : "Not able to create Drink"}

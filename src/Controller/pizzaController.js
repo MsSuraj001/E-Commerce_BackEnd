@@ -8,7 +8,7 @@ async function addPizza(req, res){
             pizzaName : req.body.pizzaName,
             pizzaPrice : req.body.pizzaPrice,
             pizzaDescription : req.body.pizzaDescription,
-            imagePath : req.file.path,
+            imagePath : req.file?.path,
             pizzaCotegary : req.body.pizzaCotegary,
             inStock : req.body.inStock,
             quantity : req.body.quantity

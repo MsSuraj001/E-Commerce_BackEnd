@@ -12,7 +12,7 @@ async function createPizza(pizzaDetails){
                 const cloudinaryResponse = await cloudinary.uploader.upload(imagePath);
                 var pizzaImage = cloudinaryResponse.secure_url;
                 // console.log(pizzaImage);
-                await fs.unlink(imagePath)
+                await fs.unlink(process.cwd() + "/" + imagePath)
             }catch(error){
                 console.log(error);
                 throw { reason : "Not able to create Produt", status : 500};
