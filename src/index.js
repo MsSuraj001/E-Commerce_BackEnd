@@ -5,8 +5,7 @@ const { routes } = require('./Router/userRouter');
 const { authRoutes } = require('./Router/authRouter');
 const cookieParser = require('cookie-parser');
 const { isLoggedIn } = require('./Validations/authValidation');
-const pizzaRoute = require('./Router/pizzaRoutes');
-const drinkRoute = require('./Router/drinkRouter');
+const productRoute = require('./Router/pizzaRoutes');
 
 const app = express();
 
@@ -17,8 +16,8 @@ app.use(express.urlencoded({extended: true}));
 
 app.use('/user', routes);
 app.use('/auth', authRoutes);
-app.use('/pizza',pizzaRoute);
-app.use('/drink', drinkRoute);
+app.use('/product',productRoute);
+
 app.get('/test', isLoggedIn, (req, res)=>{
     console.log(req.body);
     console.log(req.cookies)

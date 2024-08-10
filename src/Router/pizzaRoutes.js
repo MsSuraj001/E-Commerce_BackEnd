@@ -1,9 +1,17 @@
 const express = require('express');
-const { addPizza } = require('../Controller/pizzaController');
+const { addPizza, getPizza } = require('../Controller/pizzaController');
 const uploader = require('../Middleweres/multerMiddlewere');
+const addDrink = require('../Controller/drinkController');
 
-const pizzaRoute = express.Router();
+const productRoute = express.Router();
+        // this is the Pizza Routers
+productRoute.post('/pizza', uploader.single('pizzaImage'), addPizza);
+productRoute.get('/:id',getPizza);
 
-pizzaRoute.post('/', uploader.single('pizzaImage'), addPizza);
 
-module.exports = pizzaRoute
+
+        // this is the Drink Router
+productRoute.post('/drink', uploader.single('drinkImgPath'), addDrink);
+
+
+module.exports = productRoute

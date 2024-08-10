@@ -10,6 +10,16 @@ async function createPizza(pizzaDetails){
     }
 }
 
+async function getIdByPizza(pizzaId){
+    try{
+        const pizza = await pizzaSchema.findById(pizzaId);
+        return pizza
+    }catch(error){
+        console.log(error);
+    }
+}
+
 module.exports = {
-    createPizza
+    createPizza,
+    getIdByPizza
 }

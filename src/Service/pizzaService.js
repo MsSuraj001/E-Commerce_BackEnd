@@ -36,6 +36,19 @@ async function createPizza(pizzaDetails){
     // }
 }
 
+async function getIdByPizza(pizzaId){
+    try{
+        const response = pizzaRepository.getIdByPizza(pizzaId)
+        if(!response){
+            throw {reason : "Not able to get Product", status : 500};
+        }
+        return response;
+    }catch(error){
+        console.log(error);
+    }
+}
+
 module.exports = {
-    createPizza
+    createPizza,
+    getIdByPizza
 }
