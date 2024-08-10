@@ -19,7 +19,17 @@ async function getIdByPizza(pizzaId){
     }
 }
 
+async function deletePizzaById(pizzaId){
+    try{
+        const pizza = await pizzaSchema.findByIdAndDelete(pizzaId);
+        return pizza;
+    }catch(error){
+        console.log(error);
+    }
+}
+
 module.exports = {
     createPizza,
-    getIdByPizza
+    getIdByPizza,
+    deletePizzaById
 }

@@ -48,7 +48,21 @@ async function getIdByPizza(pizzaId){
     }
 }
 
+async function deletePizzaById(pizzaId){
+    try{
+        const response = await pizzaRepository.deletePizzaById(pizzaId);
+        if(!response){
+            throw {reason : "Not able to delete Product", status : 500};
+        }
+        return response;
+    }catch(error){
+        console.log(error);
+        
+    }
+}
+
 module.exports = {
     createPizza,
-    getIdByPizza
+    getIdByPizza,
+    deletePizzaById
 }
