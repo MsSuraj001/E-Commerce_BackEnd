@@ -2,17 +2,17 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const couldDrink = new mongoose.Schema({
-    name: {
+    drinkName: {
         type: String,
         required: true
     },
-    price : {
+    drinkPrice : {
         type: Number,
         required : true,
     },
-    weight : {
-        type: Number,
-        required : ture
+    drinkWeight : {
+        type: String,
+        required : true
     },
     quantity : {
         type : Number,
