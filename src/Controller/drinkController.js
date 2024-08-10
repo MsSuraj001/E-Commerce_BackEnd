@@ -1,5 +1,5 @@
 const express = require('express');
-const createDrink = require('../Service/drinkService');
+const {createDrink, getDrinkById} = require('../Service/drinkService');
 
 async function addDrink(req, res){
     console.log(req.body);
@@ -31,4 +31,28 @@ async function addDrink(req, res){
     }
 }
 
-module.exports = addDrink
+async function getDrink(req, res){
+    try{
+        const drink = await getDrinkById(req.params.id);
+        return res.status(200).json({
+            success : true,
+            messagge : "Successfully get the Drink",
+            data : drink,
+            error: {}
+        })
+    }catch(error){
+        console.log(error);
+        return res.status(error.statusCode).json({
+            success : false,
+            message : "Can't get the Drink",
+            data : {},
+            error: error.reason
+        })
+        
+    }
+}
+
+module.exports = {
+    addDrink,
+    getDrink,
+}

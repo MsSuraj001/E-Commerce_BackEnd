@@ -10,6 +10,17 @@ async function createDrink(drinkDetails){
     }
 }
 
+async function getDrinkById(drinkId){
+    try{
+        const drink = await drinkSchema.findById(drinkId)
+        return drink;
+    }catch(error){
+        console.log(error);
+        
+    }
+}
+
 module.exports = {
-    createDrink
+    createDrink,
+    getDrinkById
 };

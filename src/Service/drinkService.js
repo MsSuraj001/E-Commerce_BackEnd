@@ -30,4 +30,19 @@ async function createDrink(drinkDetails){
     return drink
 }
 
-module.exports = createDrink;
+async function getDrinkById(drinkId){
+    try{
+        const response = await drinkRepository.getDrinkById(drinkId);
+        if(!response){
+            throw { reason : "Drink not found" }
+        }
+        return response;
+    }catch(error){
+        console.log(error);
+    }
+}
+
+module.exports = {
+    createDrink,
+    getDrinkById
+};

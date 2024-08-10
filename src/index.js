@@ -5,7 +5,7 @@ const { routes } = require('./Router/userRouter');
 const { authRoutes } = require('./Router/authRouter');
 const cookieParser = require('cookie-parser');
 const { isLoggedIn } = require('./Validations/authValidation');
-const productRoute = require('./Router/pizzaRoutes');
+const productRoute = require('./Router/productRouter');
 
 const app = express();
 
