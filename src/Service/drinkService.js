@@ -4,10 +4,8 @@ const fs = require('fs/promises');
 const drinkRepository = require('../Repository/drinkRepository');
 
 async function createDrink(drinkDetails){
-    console.log("this is the service layer");
     
-    const drinkImgPath = drinkDetails.drinkImgPath
-    console.log(drinkImgPath)
+    const drinkImgPath = drinkDetails.drinkImgPath;
 
     if(drinkImgPath){
         try{
@@ -16,7 +14,7 @@ async function createDrink(drinkDetails){
             await fs.unlink(drinkImgPath)
         }catch(err){
             console.log(err);
-            throw { reason : "Not able to create Drink 1"}
+            throw { reason : "Not able to create Drink"}
         }
     }
 
@@ -26,7 +24,7 @@ async function createDrink(drinkDetails){
     })
 
     if(!drinkImgPath){
-        throw { reason : "Not able to create Drink 2"}
+        throw { reason : "Not able to create Drink"}
     }
 
     return drink
