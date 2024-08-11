@@ -1,5 +1,5 @@
 const express = require('express');
-const {createDrink, getDrinkById} = require('../Service/drinkService');
+const {createDrink, getDrinkById, deleteDrinkById} = require('../Service/drinkService');
 
 async function addDrink(req, res){
     console.log(req.body);
@@ -52,7 +52,28 @@ async function getDrink(req, res){
     }
 }
 
+async function deleteDrink(req, res){
+    try{
+        const drink = await deleteDrinkById(req.params.id);
+        return res.status(200).json({
+            success : true,
+            message : "Drink deleted successfully",
+            data : drink,
+            error : {}
+        })
+    }catch(error){
+        console.log(error);
+        return res.status(error.statusCode).json({
+            success : false,
+            message: "Drink not deleted",
+            data : {},
+            error : error.reason
+        })
+    }
+}
+
 module.exports = {
     addDrink,
     getDrink,
+    deleteDrink
 }

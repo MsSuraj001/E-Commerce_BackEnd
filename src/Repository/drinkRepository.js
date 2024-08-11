@@ -20,7 +20,17 @@ async function getDrinkById(drinkId){
     }
 }
 
+async function deleteDrinkById(drinkId){
+    try{
+        const drink = await drinkSchema.findByIdAndDelete(drinkId);
+        return drink;
+    }catch(error){
+        console.log(error);
+    }
+}
+
 module.exports = {
     createDrink,
-    getDrinkById
+    getDrinkById,
+    deleteDrinkById
 };

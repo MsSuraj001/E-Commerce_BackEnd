@@ -42,7 +42,20 @@ async function getDrinkById(drinkId){
     }
 }
 
+async function deleteDrinkById(drinkId){
+    try{
+        const response = await drinkRepository.deleteDrinkById(drinkId);
+        if(!response){
+            throw { reason : "Drink not found" }
+        }
+        return response;
+    }catch(error){
+        console.log(error);
+    }
+}
+
 module.exports = {
     createDrink,
-    getDrinkById
+    getDrinkById,
+    deleteDrinkById
 };
