@@ -37,6 +37,29 @@ async function isLoggedIn(req, res, next){
     }
 }
 
+async function isAdmin(req, res, next){
+    const loggedInUser = req.user;
+    console.log("this is the ",loggedInUser);
+    console.log(loggedInUser.role);
+    
+    if(loggedInUser.role === "ADMIN"){
+        console.log("User is an Admin");
+        next()
+    }else{
+        return res.status(401).json({
+            success : false,
+            message : "You are not authorise for this action",
+            data : {},
+            error : {
+                statusCode : 401,
+                reason : "Unauthorised user for this action",
+            }
+        })
+    }
+    
+}
+
 module.exports = {
-    isLoggedIn
+    isLoggedIn,
+    isAdmin,
 }

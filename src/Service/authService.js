@@ -25,11 +25,12 @@ async function loginUser(authDetails){
 
         throw { reason : "Invalid Password please try again"}
     }
-
-    const token = jwt.sign({email : user.email, id : user._id}, JWT_SECRET_KEY, {
+    
+    const userRole = user.role ? user.role : "USER";
+    const token = jwt.sign({email : user.email, id : user._id, role : userRole}, JWT_SECRET_KEY, {
         expiresIn : JWT_EXPIRY
     });
-    console.log(token);
+    console.log("this is the authser provided token",token);
     return token
 } 
 
