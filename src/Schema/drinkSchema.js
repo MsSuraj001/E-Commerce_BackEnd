@@ -10,6 +10,9 @@ const couldDrink = new mongoose.Schema({
         type: Number,
         required : true,
     },
+    drinkImage : {
+        type : String,
+    },
     drinkWeight : {
         type: String,
         required : true

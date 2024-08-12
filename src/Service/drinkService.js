@@ -20,7 +20,7 @@ async function createDrink(drinkDetails){
 
     const drink = await drinkRepository.createDrink({
         ...drinkDetails,
-        drinkImg : imgPathD
+        drinkImage : imgPathD
     })
 
     if(!drinkImgPath){
