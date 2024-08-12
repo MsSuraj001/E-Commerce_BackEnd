@@ -15,7 +15,7 @@ async function findUserOne(parameter){
 async function createUser(userDetails){
     try {
         const response = await User.create(userDetails);
-        console.log(response);
+        // console.log("this is the Repo res",response);
         return response;
     } catch (error) {
         console.log(error);

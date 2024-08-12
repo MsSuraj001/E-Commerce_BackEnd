@@ -17,6 +17,9 @@ const userSchema = new mongoose.Schema({
         required : true,
         lowercase : true,
     },
+    image : {
+        type: String,
+    },
     email : {
         type: String,
         required: true,
