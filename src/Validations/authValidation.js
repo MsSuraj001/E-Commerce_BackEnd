@@ -13,9 +13,21 @@ async function isLoggedIn(req, res, next){
         })
     }
 
-    const decoded = jwt.verify(token, JWT_SECRET_KEY);
+    
+    try{
+        const decoded = jwt.verify(token, JWT_SECRET_KEY);
 
-    if(!decoded){
+        if(!decoded){
+            throw { reason : "Not authonticted person"}
+        }
+
+        req.user = {
+            email : decoded.email,
+            id : decoded.id,
+            role : decoded.role
+        }
+        next()
+    }catch(error){
         return res.status(401).json({
             success : false,
             data : {},
@@ -23,13 +35,6 @@ async function isLoggedIn(req, res, next){
             message : "Invalied Auth Token"
         })
     }
-
-    req.user = {
-        email : decoded.email,
-        id : decoded.id
-    }
-
-    next();
 }
 
 module.exports = {
