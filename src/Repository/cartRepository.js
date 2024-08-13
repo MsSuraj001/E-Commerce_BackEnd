@@ -12,6 +12,22 @@ async function createCart(userId){
     }
 }
 
+async function getCartByUserId(userId){
+    try{
+        const cart = await Cart.findOne({
+            user : userId
+        })
+        if(!cart){
+            throw { message : "Cart Not Found Repo"}
+        }
+        return cart;
+    }catch(error){
+        console.log(error);
+        
+    }
+}
+
 module.exports = {
-    createCart
+    createCart,
+    getCartByUserId
 }

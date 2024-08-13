@@ -12,12 +12,12 @@ async function getTheCart(req, res){
     }catch(error){
         console.log(error);
         console.log("Controller error");
-        return res.status(error.statusCode).json({
-            success : false,
-            message : error.message,
-            data : {},
-            error : error
-        })
+        // return res.status(error.statusCode).json({
+        //     success : false,
+        //     message : error.message,
+        //     data : {},
+        //     error : error
+        // })
     }
 }
 

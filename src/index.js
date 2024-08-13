@@ -6,7 +6,7 @@ const { authRoutes } = require('./Router/authRouter');
 const cookieParser = require('cookie-parser');
 const { isLoggedIn } = require('./Validations/authValidation');
 const productRoute = require('./Router/productRouter');
-const cartRoutes = require('./Router/cartRoutes');
+const cartRouter = require('./Router/cartRoutes');
 
 const app = express();
 
@@ -18,7 +18,7 @@ app.use(express.urlencoded({extended: true}));
 app.use('/user', routes);
 app.use('/auth', authRoutes);
 app.use('/product',productRoute);
-app.use('/cart', cartRoutes);
+app.use('/cart', cartRouter);
 
 app.get('/test', isLoggedIn, (req, res)=>{
     console.log(req.body);
