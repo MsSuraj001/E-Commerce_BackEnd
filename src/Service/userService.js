@@ -1,6 +1,7 @@
 const cloudinary = require('../Config/cloudinayConfig')
 const fs = require('fs/promises')
-const { findUserOne, createUser } = require("../Repository/userRepository")
+const { findUserOne, createUser } = require("../Repository/userRepository");
+const { createCart } = require('../Repository/cartRepository');
 
 async function registerUser(userDetails){
     // console.log(userDetails);
@@ -41,6 +42,7 @@ async function registerUser(userDetails){
     })
     // console.log(userWithImg);
     
+    await createCart(userWithImg._id);
 
     if(!userWithImg){
         console.log("not given the user Image");
