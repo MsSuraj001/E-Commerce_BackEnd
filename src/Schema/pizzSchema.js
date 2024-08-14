@@ -26,7 +26,8 @@ const Schema = new mongoose.Schema({
     },
     quantity : {
         type : Number,
-        min : [10, "Please added the min quatity of 10"]
+        min : [10, "Please added the min quatity of 10"],
+        default : 10,
     }
 })
 

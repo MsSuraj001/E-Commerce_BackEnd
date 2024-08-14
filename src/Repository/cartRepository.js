@@ -1,4 +1,4 @@
-const Cart = require('../Schema/cartSchema')
+const Cart = require('../Schema/cartSchema');
 
 async function createCart(userId){
     try{
@@ -16,7 +16,7 @@ async function getCartByUserId(userId){
     try{
         const cart = await Cart.findOne({
             user : userId
-        })
+        }).populate('items.product');
         if(!cart){
             throw { message : "Cart Not Found Repo"}
         }
@@ -29,5 +29,5 @@ async function getCartByUserId(userId){
 
 module.exports = {
     createCart,
-    getCartByUserId
+    getCartByUserId,
 }
