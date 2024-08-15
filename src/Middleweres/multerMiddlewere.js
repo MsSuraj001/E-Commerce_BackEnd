@@ -9,7 +9,7 @@ const StorageConfigration = multer.diskStorage({
 
     filename : (req, file, next)=>{
         // console.log(file);   
-        next(null, `${Date.now()}${path.extname(file.originalname)}`)
+        next(null, `${Date.now()}${path.extname(file.originalname)}`);
     }
 })
 

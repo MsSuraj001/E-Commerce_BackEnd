@@ -1,5 +1,6 @@
 const { getCartByUserId } = require("../Repository/cartRepository");
-const { getIdByPizza } = require("../Repository/pizzRepository");
+const { getDrinkById } = require("../Repository/drinkRepository");
+const { getIdByProduct } = require("../Repository/productRepository");
 
 async function getCart(userId){
     const cart = await getCartByUserId(userId);
@@ -12,7 +13,7 @@ async function getCart(userId){
 async function modifyCart(userId, productId, shouldAdd = 'add'){
     const quanatityValue = (shouldAdd == true) ? 1 : -1;
     const cart = await getCart(userId);
-    const product = await getIdByPizza(productId);
+    const product = await getIdByProduct(productId);
     if(!product){
         throw { reason : "Currently Produt is not available"}
     }
@@ -22,8 +23,8 @@ async function modifyCart(userId, productId, shouldAdd = 'add'){
     }
 
     let foundProduct = false;
-    cart.items.forEach(items => {
-        // console.log("Out side",cart.items);
+    cart.items.forEach(items => {       // issue the first product add in cart not show the product details
+        // console.log("Out side", items.product);
         if(items.product._id == productId){
             if(shouldAdd){
                 // console.log("inside", items.product);
@@ -66,7 +67,34 @@ async function modifyCart(userId, productId, shouldAdd = 'add'){
     return cart;
 }
 
+async function addDrinkToCartById(userId, id){
+    const cart = await getCart(userId);
+    // console.log(cart);
+    
+    const product = await getDrinkById(id);
+    // console.log(product);
+    if(!product.inStock && product.quantity > 0){
+        throw new {message : "Product is currently not available in your requirement"}
+    }
+    if(!product){
+        throw {reason : "Product is out of stock"}  
+    }
+
+    cart.items.forEach(items =>{
+        console.log(cart.items.product)
+    })
+
+    cart.items.push({
+        product : id,
+        quantity : 1
+    })
+
+    await cart.save();
+    return cart;
+}
+
 module.exports = {
     getCart,
     modifyCart,
+    addDrinkToCartById,
 }

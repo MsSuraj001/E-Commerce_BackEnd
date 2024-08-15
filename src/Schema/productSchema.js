@@ -24,7 +24,7 @@ const Schema = new mongoose.Schema({
     productImage : {
         type : String,
     },
-    productBranch : {
+    productTypes : {
         type : String,
         enum : ['pizza', 'drink', 'sideItems', 'carryBag']
     },
@@ -38,6 +38,6 @@ const Schema = new mongoose.Schema({
     }
 })
 
-const PizzaShcema = mongoose.model('PizzaSchema', Schema);
+const ProductShcema = mongoose.model('Products', Schema);
 
-module.exports = PizzaShcema;
+module.exports = ProductShcema;

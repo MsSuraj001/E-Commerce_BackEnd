@@ -1,17 +1,17 @@
 const cloudinary = require('../Config/cloudinayConfig');
 const fs = require('fs/promises')
-const pizzaRepository = require('../Repository/pizzRepository')
+const productRepository = require('../Repository/productRepository')
 
-async function createPizza(pizzaDetails){
+async function createProduct(productDetails){
     // try{
-        const imagePath = pizzaDetails.imagePath;
+        const imagePath = productDetails.imagePath;
         // console.log(imagePath);
         
         if(imagePath){
             try{
                 const cloudinaryResponse = await cloudinary.uploader.upload(imagePath);
-                var pizzaImage = cloudinaryResponse.secure_url;
-                // console.log(pizzaImage);
+                var productImage = cloudinaryResponse.secure_url;
+                // console.log(productImage);
                 await fs.unlink(process.cwd() + "/" + imagePath)
             }catch(error){
                 console.log(error);
@@ -19,26 +19,26 @@ async function createPizza(pizzaDetails){
             }
         }
 
-        const pizza = await pizzaRepository.createPizza({
-            ...pizzaDetails,
-            pizzaImage : pizzaImage
+        const product = await productRepository.createProduct({
+            ...productDetails,
+            productImage : productImage
         });
 
-        if(!pizza){
+        if(!product){
             throw {reason : "Not able to create Product", status : 500};
         }
 
 
-        return pizza;
+        return product;
     // }catch(error){
     //     console.log(error);
     //     console.log("this is the service error");
     // }
 }
 
-async function getIdByPizza(pizzaId){
+async function getIdByProduct(productId){
     try{
-        const response = pizzaRepository.getIdByPizza(pizzaId)
+        const response = productRepository.getIdByProduct(productId)
         if(!response){
             throw {reason : "Not able to get Product", status : 500};
         }
@@ -48,9 +48,9 @@ async function getIdByPizza(pizzaId){
     }
 }
 
-async function deletePizzaById(pizzaId){
+async function deleteProductById(productId){
     try{
-        const response = await pizzaRepository.deletePizzaById(pizzaId);
+        const response = await productRepository.deleteProductById(productId);
         if(!response){
             throw {reason : "Not able to delete Product", status : 500};
         }
@@ -62,7 +62,7 @@ async function deletePizzaById(pizzaId){
 }
 
 module.exports = {
-    createPizza,
-    getIdByPizza,
-    deletePizzaById
+    createProduct,
+    getIdByProduct,
+    deleteProductById,
 }

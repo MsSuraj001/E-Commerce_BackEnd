@@ -1,4 +1,4 @@
-const { getCart, modifyCart } = require("../Service/cartService");
+const { getCart, modifyCart, addDrinkToCartById } = require("../Service/cartService");
 
 async function getTheCart(req, res){
     try{
@@ -41,7 +41,26 @@ async function modifyProductToCart(req, res){
     }
 }
 
+async function addDrink(req, res){
+    console.log(req.user.id)
+    console.log(req.params.id);
+    
+    try{
+        const drink = await addDrinkToCartById(req.user.id, req.params.id);
+        return res.status(200).json({
+            success : true,
+            message : "Successfully add the drink to cart",
+            data : drink,
+            error : {}
+        })
+    }catch(error){
+        console.log(error);
+        console.log("Controller error")
+    }
+}
+
 module.exports = {
     getTheCart,
-    modifyProductToCart
+    modifyProductToCart,
+    addDrink,
 }

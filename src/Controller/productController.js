@@ -1,22 +1,23 @@
 const express = require('express');
-const { createPizza, getIdByPizza, deletePizzaById } = require('../Service/pizzaService');
+const { createProduct, getIdByProduct, deleteProductById } = require('../Service/productService');
 
 
-async function addPizza(req, res){
+async function addProduct(req, res){
     try {
-        const Pizza = await createPizza({
-            pizzaName : req.body.pizzaName,
-            pizzaPrice : req.body.pizzaPrice,
-            pizzaDescription : req.body.pizzaDescription,
+        const Product = await createProduct({
+            productName : req.body.productName,
+            productPrice : req.body.productPrice,
+            productDescription : req.body.productDescription,
             imagePath : req.file?.path,
-            pizzaCotegary : req.body.pizzaCotegary,
+            productCotegary : req.body.productCotegary,
+            productTypes : req.body.productTypes,
             inStock : req.body.inStock,
             quantity : req.body.quantity
         })
         return res.json({
             success : true,
             message : "Successfully added the Pizza",
-            data : Pizza,
+            data : Product,
             error : {},
         })
     } catch (error) {
@@ -30,13 +31,13 @@ async function addPizza(req, res){
     }
 }
 
-async function getPizza(req, res){
+async function getProduct(req, res){
     try{
-       const Pizza = await getIdByPizza(req.params.id);
+       const Product = await getIdByProduct(req.params.id);
        return res.status(200).json({
         success : true,
         message : "Successfully get the Pizza",
-        data : Pizza,
+        data : Product,
         error : {}
        })
     }catch(error){
@@ -50,13 +51,13 @@ async function getPizza(req, res){
     }
 }
 
-async function deletePizza(req, res){
+async function deleteProduct(req, res){
     try{
-       const Pizza = await deletePizzaById(req.params.id);
+       const Product = await deleteProductById(req.params.id);
        return res.status(200).json({
         success : true,
         message : "Successfully Delete the Pizza",
-        data : Pizza,
+        data : Product,
         error : {}
        })
     }catch(error){
@@ -71,7 +72,7 @@ async function deletePizza(req, res){
 }
 
 module.exports = {
-    addPizza,
-    getPizza,
-    deletePizza
+    addProduct,
+    getProduct,
+    deleteProduct
 }
