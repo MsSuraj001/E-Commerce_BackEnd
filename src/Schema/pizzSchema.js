@@ -2,24 +2,31 @@ const mongoose = require('mongoose')
 
 
 const Schema = new mongoose.Schema({
-    pizzaName : {
+    productName : {
         type : String,
         required : true,
     },
-    pizzaPrice : {
+    productPrice : {
         type : Number,
         required : true,
     },
-    pizzaDescription : {
+    productDescription : {
         type : String,
         required : true,
         min : [20, "min-length of pizzDescription atleast of 20 charchters"],
         max : [50, "max-length of pizzDescription atleast of 50 charchters"]
     },
-    pizzaCotegary : {
+    productCotegary : {
         type : String,
         required : true,
         enum : ["veg", "non-veg", "mixed"]
+    },
+    productImage : {
+        type : String,
+    },
+    productBranch : {
+        type : String,
+        enum : ['pizza', 'drink', 'sideItems', 'carryBag']
     },
     inStock : {
         type : Boolean,
