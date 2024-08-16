@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const { isLoggedIn } = require('./Validations/authValidation');
 const productRoute = require('./Router/productRouter');
 const cartRouter = require('./Router/cartRoutes');
+const orderRoute = require('./Router/orderRouter');
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use('/user', routes);
 app.use('/auth', authRoutes);
 app.use('/product',productRoute);
 app.use('/cart', cartRouter);
+app.use('/order', orderRoute);
 
 app.get('/test', isLoggedIn, (req, res)=>{
     console.log(req.body);

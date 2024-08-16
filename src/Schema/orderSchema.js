@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const orderSchema = new mongoose.Schema({
     user :{
         type : mongoose.Schema.Types.ObjectId,
-        ref : 'User',
+        ref : 'Users',
         requierd : true
     },
     items : [
@@ -24,16 +24,17 @@ const orderSchema = new mongoose.Schema({
     totalPrice : {
         type : Number,
         requierd : true,
+        default : 0
     },
     status : {
         type : String,
         default : "ORDERED",
         enum : ["ORDERED", "CANCELED", "PROCESSING", "OUT-FOR-DELEVERY"]
     },
-    address : {
-        type : String,
-        min : [10, "address should be atleast 10 characters"]
-    },
+    // address : {
+    //     type : String,
+    //     min : [10, "address should be atleast 10 characters"]
+    // },
     paymentMethod : {
         type : String,
         enum : ["CASH", "ONLINE"],
