@@ -1,4 +1,4 @@
-const { getCartByUserId } = require("../Repository/cartRepository");
+const { getCartByUserId, clearCart } = require("../Repository/cartRepository");
 const { getDrinkById } = require("../Repository/drinkRepository");
 const { getIdByProduct } = require("../Repository/productRepository");
 
@@ -93,8 +93,14 @@ async function addDrinkToCartById(userId, id){
     return cart;
 }
 
+async function clearCartByUserId(userId){
+    const response = await clearCart(userId);
+    return response;
+}
+
 module.exports = {
     getCart,
     modifyCart,
     addDrinkToCartById,
+    clearCartByUserId,
 }
