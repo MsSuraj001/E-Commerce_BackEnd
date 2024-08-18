@@ -1,5 +1,5 @@
 const express = require('express');
-const { addProduct, getProduct, deleteProduct } = require('../Controller/productController');
+const { addProduct, getProduct, deleteProduct, getAllProuducts } = require('../Controller/productController');
 const uploader = require('../Middleweres/multerMiddlewere');
 const {addDrink, getDrink, deleteDrink} = require('../Controller/drinkController');
 const { isLoggedIn, isAdmin } = require('../Validations/authValidation');
@@ -13,8 +13,9 @@ productRoute.post(
         uploader.single('productImage'), 
         addProduct,
 );
-productRoute.get('/:id',getProduct);
-productRoute.delete('/:id', deleteProduct);
+productRoute.get('/:id', isAdmin,getProduct);
+productRoute.get('/', isLoggedIn, isAdmin, getAllProuducts);
+productRoute.delete('/:id', isAdmin, deleteProduct);
 
 
 
