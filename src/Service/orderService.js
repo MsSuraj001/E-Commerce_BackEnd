@@ -1,5 +1,5 @@
 const { getCartByUserId, clearCart } = require("../Repository/cartRepository");
-const { newOrder, getOrderByUserId } = require("../Repository/orderRepository");
+const { newOrder, getOrderByUserId, getOrderById } = require("../Repository/orderRepository");
 const { findUserOne } = require("../Repository/userRepository");
 
 async function createOrder(userId, paymentMethod){
@@ -63,7 +63,16 @@ async function getOrderDetails(userId){
     return order
 }
 
+async function getOrderDetailsById(orderId){
+    const order = await getOrderById(orderId);
+    if(!order){
+        throw new Error("Order is not Found");
+    }
+    return order;
+}
+
 module.exports = {
     createOrder,
-    getOrderDetails
+    getOrderDetails,
+    getOrderDetailsById
 }

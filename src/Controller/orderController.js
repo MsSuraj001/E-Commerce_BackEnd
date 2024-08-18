@@ -1,4 +1,4 @@
-const { createOrder, getOrderDetails } = require("../Service/orderService");
+const { createOrder, getOrderDetails, getOrderDetailsById } = require("../Service/orderService");
 
 async function createNewOrder(req, res){
     try{
@@ -41,7 +41,28 @@ async function getAllOrderDetailsByUserId(req, res){
     }
 }
 
+async function getOrderByOrderId(req, res){
+    try{
+        const order = await getOrderDetailsById(req.params.id);
+        return res.status(200).json({
+            success : true,
+            message : "Order Details Retrieved Successfully",
+            data : order,
+            error : {}
+        })
+    }catch(error){
+        console.error(error);
+        return res.status(error.statusCode).json({
+            success : false,
+            message : "Order Not Found",
+            error : error,
+            data : {}
+        })
+    }
+}
+
 module.exports = {
     createNewOrder,
     getAllOrderDetailsByUserId,
+    getOrderByOrderId
 }

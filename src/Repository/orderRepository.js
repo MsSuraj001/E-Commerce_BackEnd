@@ -11,7 +11,13 @@ async function getOrderByUserId(userId){
     return response;
 }
 
+async function getOrderById(orderId){
+    const response = await Order.findById(orderId).populate('items.product');
+    return response;
+}
+
 module.exports = {
     newOrder,
-    getOrderByUserId
+    getOrderByUserId,
+    getOrderById
 }
