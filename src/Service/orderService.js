@@ -1,5 +1,5 @@
 const { getCartByUserId, clearCart } = require("../Repository/cartRepository");
-const { newOrder } = require("../Repository/orderRepository");
+const { newOrder, getOrderByUserId } = require("../Repository/orderRepository");
 const { findUserOne } = require("../Repository/userRepository");
 
 async function createOrder(userId, paymentMethod){
@@ -32,18 +32,20 @@ async function createOrder(userId, paymentMethod){
 
     orderObject.status = 'ORDERED'
     orderObject.totalPrice = 0;
-    console.log(typeof(totalPrice));
+    console.log(typeof(orderObject.totalPrice));
     
-
+    console.log(orderObject.items);
+    
     orderObject.items.forEach( (cartItem) => {
-        orderObject.totalPrice += cartItem.quantity * cartItem.product.price;
+        orderObject.totalPrice += cartItem.quantity * cartItem.product.productPrice;
+        // orderObject.totalPrice = orderObject.totalPrice + (cartItem.quantity * cartItem.product.price);
     })
     
     orderObject.paymentMethod = paymentMethod
     // console.log(orderObject); it's working
 
     const order = await newOrder(orderObject);
-    console.log("Finl",order);
+    console.log("Final",order);
 
     if(!order){
         throw new Error("Order is not created");
@@ -53,6 +55,15 @@ async function createOrder(userId, paymentMethod){
     return order
 }
 
+async function getOrderDetails(userId){
+    const order = await getOrderByUserId(userId);
+    if(!order){
+        throw new Error("Order is not Found");
+    }
+    return order
+}
+
 module.exports = {
-    createOrder
+    createOrder,
+    getOrderDetails
 }

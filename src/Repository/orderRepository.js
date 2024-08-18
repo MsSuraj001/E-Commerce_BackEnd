@@ -6,6 +6,12 @@ async function newOrder(orderDetails){
     return response;
 }
 
+async function getOrderByUserId(userId){
+    const response = await Order.find({user: userId}).populate('items.product');
+    return response;
+}
+
 module.exports = {
-    newOrder
+    newOrder,
+    getOrderByUserId
 }
