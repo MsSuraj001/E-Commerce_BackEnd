@@ -72,6 +72,32 @@ async function cancleOrder(req, res){
         })
     }catch(error){
         console.error(error);
+        return res.status(error.statusCode).json({
+            success : false,
+            message : 'Order not canclled',
+            error : error,
+            data : {}
+        })
+    }
+}
+
+async function changeOrderStatus(req, res){
+    try{
+        const order = await updateOrder(req.params.id, req.body.status);
+        return res.status(200).json({
+            success : true,
+            message : "Order Status Changed Successfully",
+            data : order,
+            error : {}
+        })
+    }catch(error){
+        console.error(error);
+        return res.status(error.statusCode).json({
+            success : false,
+            message : 'Order Status not Changed',
+            data : {},
+            error : error
+        })
     }
 }
 
@@ -79,5 +105,6 @@ module.exports = {
     createNewOrder,
     getAllOrderDetailsByUserId,
     getOrderByOrderId,
-    cancleOrder
+    cancleOrder,
+    changeOrderStatus
 }
