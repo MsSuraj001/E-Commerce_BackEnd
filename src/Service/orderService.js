@@ -1,5 +1,5 @@
 const { getCartByUserId, clearCart } = require("../Repository/cartRepository");
-const { newOrder, getOrderByUserId, getOrderById } = require("../Repository/orderRepository");
+const { newOrder, getOrderByUserId, getOrderById, updateOrderStatus } = require("../Repository/orderRepository");
 const { findUserOne } = require("../Repository/userRepository");
 
 async function createOrder(userId, paymentMethod){
@@ -71,8 +71,17 @@ async function getOrderDetailsById(orderId){
     return order;
 }
 
+async function updateOrder(orderId, status){
+    const order = await updateOrderStatus(orderId, status);
+    if(!order){
+        throw new Error("Order is not updated");
+    }
+    return order;
+}
+
 module.exports = {
     createOrder,
     getOrderDetails,
-    getOrderDetailsById
+    getOrderDetailsById,
+    updateOrder
 }

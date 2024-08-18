@@ -1,4 +1,4 @@
-const { createOrder, getOrderDetails, getOrderDetailsById } = require("../Service/orderService");
+const { createOrder, getOrderDetails, getOrderDetailsById, updateOrder } = require("../Service/orderService");
 
 async function createNewOrder(req, res){
     try{
@@ -61,8 +61,23 @@ async function getOrderByOrderId(req, res){
     }
 }
 
+async function cancleOrder(req, res){
+    try{
+        const order = await updateOrder(req.params.id, "CANCELED");
+        return res.status(200).json({
+            success : true,
+            message : "Order Cancelled Successfully",
+            data : order,
+            error : {}
+        })
+    }catch(error){
+        console.error(error);
+    }
+}
+
 module.exports = {
     createNewOrder,
     getAllOrderDetailsByUserId,
-    getOrderByOrderId
+    getOrderByOrderId,
+    cancleOrder
 }
