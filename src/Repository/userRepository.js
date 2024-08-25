@@ -1,5 +1,6 @@
 
 const { User } = require("../Schema/userSchema");
+const { userAddressSchema } = require('../Schema/userAddressSchema')
 
 async function findUserOne(parameter){
     try{
@@ -17,13 +18,25 @@ async function createUser(userDetails){
         const response = await User.create(userDetails);
         // console.log("this is the Repo res",response);
         return response;
-    } catch (error) {
+    } catch (error) { 
         console.log(error);
         console.log("User Created error");
+    }
+}
+
+async function createUserAddress(userAddress){
+    try{
+        const response = await userAddressSchema.create(userAddress);
+        return response;
+    }catch(error){
+        console.log(error);
+        console.log("this is the Repo error");
+        
     }
 }
 
 module.exports = {
     findUserOne,
     createUser,
+    createUserAddress
 }

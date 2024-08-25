@@ -13,8 +13,6 @@ const Schema = new mongoose.Schema({
     mobileNumber :{
         type : Number,
         required : true,
-        min : [10, "Atleast min 10 desits in mobile Number"],
-        max : [12, "Atleast max 12 desits in mobile Number"]
     },
     state : {
         type : String,
@@ -27,7 +25,7 @@ const Schema = new mongoose.Schema({
     pinCode : {
         type : Number,
         required : true,
-        length : 6
+        // length : 6
     },
     landMark : {
         type : String,

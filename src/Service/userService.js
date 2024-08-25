@@ -1,6 +1,6 @@
 const cloudinary = require('../Config/cloudinayConfig')
 const fs = require('fs/promises')
-const { findUserOne, createUser } = require("../Repository/userRepository");
+const { findUserOne, createUser, createUserAddress } = require("../Repository/userRepository");
 const { createCart } = require('../Repository/cartRepository');
 
 async function registerUser(userDetails){
@@ -54,6 +54,17 @@ async function registerUser(userDetails){
     
 }
 
+async function registerUserAddress(userAddress){
+    try{
+        const userAddressRes = await createUserAddress(userAddress);
+        return userAddressRes;
+    }catch(error){
+        console.log(error);
+        console.log("Ser error")
+    }
+}
+
 module.exports = {
-    registerUser
+    registerUser,
+    registerUserAddress
 }
