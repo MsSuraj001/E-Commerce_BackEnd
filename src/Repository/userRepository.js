@@ -55,10 +55,21 @@ async function getTheUserDetails(userId){
     }
 }
 
+async function getTheAllAddress(userId){
+    try{
+        const response = await allAddressUser.findOne({user : userId});
+        return response;
+    }catch(error){
+        console.log(error);
+        console.log("Repo error")
+    }
+}
+
 module.exports = {
     findUserOne,
     createUser,
     createUserAddress,
     getTheUserDetails,
     createAddress,
+    getTheAllAddress,
 }

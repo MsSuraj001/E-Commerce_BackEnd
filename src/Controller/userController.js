@@ -1,5 +1,5 @@
 
-const { registerUser, registerUserAddress, userDetails } = require("../Service/userService")
+const { registerUser, registerUserAddress, userDetails, fetchAddressCart } = require("../Service/userService")
 
 async function userCreate(req, res){
     // console.log(req.body);
@@ -80,8 +80,30 @@ async function getUserDetails(req, res){
     }
 }
 
+async function getAllAddress(req, res){
+    console.log(req.user.id);
+    
+    try{
+        const response = await fetchAddressCart(req.user.id)
+        return res.status(200).json({
+            success : true,
+            message : "Successfully fetch the all address",
+            data : response,
+            error : {}
+        })
+    }catch(error){
+        return res.status(500).json({
+            success : false,
+            message : "Internal server error",
+            error : error.message,
+            data : {}
+        })
+    }
+}
+
 module.exports = {
     userCreate,
     addUserAddress,
     getUserDetails,
+    getAllAddress
 }

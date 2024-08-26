@@ -1,6 +1,6 @@
 const cloudinary = require('../Config/cloudinayConfig')
 const fs = require('fs/promises')
-const { findUserOne, createUser, createUserAddress, getTheUserDetails, createAddress } = require("../Repository/userRepository");
+const { findUserOne, createUser, createUserAddress, getTheUserDetails, createAddress, getTheAllAddress } = require("../Repository/userRepository");
 const { createCart } = require('../Repository/cartRepository');
 
 async function registerUser(userDetails){
@@ -75,8 +75,17 @@ async function userDetails(userId){
     }
 }
 
+async function fetchAddressCart(userId){
+    const response = await getTheAllAddress(userId);
+    if(!response){
+        throw {message : "Not Found the Addresses"}
+    }
+    return response;
+}
+
 module.exports = {
     registerUser,
     registerUserAddress,
-    userDetails
+    userDetails,
+    fetchAddressCart,
 }
