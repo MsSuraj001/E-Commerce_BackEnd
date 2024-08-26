@@ -21,8 +21,8 @@ const Schema = new mongoose.Schema({
 
 }, {timeseries : true, timestamps : true})
 
-const userAddressSchema = mongoose.model("UserAddressCart", Schema)
+const allAddressUser = mongoose.model("UserAddressCart", Schema);
 
 module.exports = {
-    userAddressSchema
+    allAddressUser
 }

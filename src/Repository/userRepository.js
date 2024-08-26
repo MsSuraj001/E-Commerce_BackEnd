@@ -1,6 +1,7 @@
 
 const { User } = require("../Schema/userSchema");
-const { userAddressSchema } = require('../Schema/userAddressSchema')
+const { userAddressSchema } = require('../Schema/userAddressSchema');
+const { allAddressUser } = require("../Schema/userAddressCartS");
 
 async function findUserOne(parameter){
     try{
@@ -34,6 +35,16 @@ async function createUserAddress(userAddress){
     }
 }
 
+async function createAddress(userId){
+    const response = await allAddressUser.create({
+        user : userId
+    })
+    if(!response){
+        throw  { reason : "User Address not created"}
+    }
+    return response;
+}
+
 async function getTheUserDetails(userId){
     try{
         const response = await User.findById(userId);
@@ -48,5 +59,6 @@ module.exports = {
     findUserOne,
     createUser,
     createUserAddress,
-    getTheUserDetails
+    getTheUserDetails,
+    createAddress,
 }
