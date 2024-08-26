@@ -31,12 +31,22 @@ async function createUserAddress(userAddress){
     }catch(error){
         console.log(error);
         console.log("this is the Repo error");
-        
+    }
+}
+
+async function getTheUserDetails(userId){
+    try{
+        const response = await User.findById(userId);
+        return response;
+    }catch(error){
+        console.log(error);
+        console.log("Repo error")
     }
 }
 
 module.exports = {
     findUserOne,
     createUser,
-    createUserAddress
+    createUserAddress,
+    getTheUserDetails
 }

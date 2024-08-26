@@ -1,5 +1,5 @@
 
-const { registerUser, registerUserAddress } = require("../Service/userService")
+const { registerUser, registerUserAddress, userDetails } = require("../Service/userService")
 
 async function userCreate(req, res){
     // console.log(req.body);
@@ -61,7 +61,27 @@ async function addUserAddress(req, res){
     }
 }
 
+async function getUserDetails(req, res){
+    try{
+        const response = await userDetails(req.user.id)
+        return res.status(200).json({
+            success : true,
+            message : "Successfully get the user Details",
+            data : response,
+            error : {}
+        })
+    }catch(error){
+        return res.status(500).json({
+            success : false,
+            message : "Internal server error",
+            error : error.message,
+            data : {}
+        })
+    }
+}
+
 module.exports = {
     userCreate,
-    addUserAddress
+    addUserAddress,
+    getUserDetails,
 }
