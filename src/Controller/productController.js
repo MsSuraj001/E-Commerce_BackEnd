@@ -1,5 +1,5 @@
 const express = require('express');
-const { createProduct, getIdByProduct, deleteProductById, getAllProductWithAdmin } = require('../Service/productService');
+const { createProduct, getIdByProduct, deleteProductById, getAllProductWithAdmin, getAllProductsWithUser } = require('../Service/productService');
 
 
 async function addProduct(req, res){
@@ -71,6 +71,22 @@ async function getAllProuducts(req, res){
     }
 }
 
+// async function getAllUserProduct(req, res){
+//     try{
+//         const product = await getAllProductsWithUser();
+//         return res.status(200).json({
+//             success : true,
+//             message : "Successfully get all the Product",
+//             data : product,
+//             error : {},
+//         })
+//     }catch(error){
+//         console.log("Cont error");
+//         console.log(error)
+        
+//     }
+// }
+
 async function deleteProduct(req, res){
     try{
        const Product = await deleteProductById(req.params.id);
@@ -95,5 +111,6 @@ module.exports = {
     addProduct,
     getProduct,
     deleteProduct,
-    getAllProuducts
+    getAllProuducts,
+    // getAllUserProduct
 }

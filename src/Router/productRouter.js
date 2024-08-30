@@ -1,5 +1,5 @@
 const express = require('express');
-const { addProduct, getProduct, deleteProduct, getAllProuducts } = require('../Controller/productController');
+const { addProduct, getProduct, deleteProduct, getAllProuducts, getAllUserProduct } = require('../Controller/productController');
 const uploader = require('../Middleweres/multerMiddlewere');
 const {addDrink, getDrink, deleteDrink} = require('../Controller/drinkController');
 const { isLoggedIn, isAdmin } = require('../Validations/authValidation');
@@ -14,9 +14,9 @@ productRoute.post(
         addProduct,
 );
 productRoute.get('/:id', isAdmin,getProduct);
-productRoute.get('/', isLoggedIn, isAdmin, getAllProuducts);
+productRoute.get('/', isLoggedIn, getAllProuducts);
 productRoute.delete('/:id', isAdmin, deleteProduct);
-
+// productRoute.get('/user', isLoggedIn, getAllUserProduct);
 
 
         // this is the Drink Router

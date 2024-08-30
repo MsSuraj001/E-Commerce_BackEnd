@@ -8,6 +8,7 @@ const { isLoggedIn } = require('./Validations/authValidation');
 const productRoute = require('./Router/productRouter');
 const cartRouter = require('./Router/cartRoutes');
 const orderRoute = require('./Router/orderRouter');
+const cors = require('cors')
 
 const app = express();
 
@@ -15,6 +16,11 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.text());
 app.use(express.urlencoded({extended: true}));
+
+app.use(cors({
+    origin : 'http://localhost:5173',
+    credentials : true
+}))
 
 app.use('/user', routes);
 app.use('/auth', authRoutes);

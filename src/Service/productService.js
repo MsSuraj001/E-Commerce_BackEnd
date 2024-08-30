@@ -56,6 +56,14 @@ async function getAllProductWithAdmin(){
     return products;
 }
 
+// async function getAllProductsWithUser(){
+//     const products = await productRepository.getAllProducts();
+//     if(!products){
+//         throw { message : "Not product is found"}
+//     }
+//     return products;
+// }
+
 async function deleteProductById(productId){
     try{
         const response = await productRepository.deleteProductById(productId);
@@ -74,4 +82,5 @@ module.exports = {
     getIdByProduct,
     deleteProductById,
     getAllProductWithAdmin,
+    // getAllProductsWithUser
 }

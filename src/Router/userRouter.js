@@ -7,7 +7,7 @@ const routes = express.Router();
 
 routes.post('/', uploader.single('image'), userCreate);
 routes.post('/address', isLoggedIn, addUserAddress);
-routes.get('/get', isLoggedIn, getUserDetails);
+routes.get('/getDetails', isLoggedIn, getUserDetails);
 routes.get('/allAddress', isLoggedIn, getAllAddress);
 
 module.exports = {
